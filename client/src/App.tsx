@@ -29,13 +29,12 @@ const App = () => {
   });
 
   const fetchWords = async () => {
-    const data = await api("words/", {
+    const response = await api("words/", {
       method: "GET",
       headers: { "content-type": "application/json" },
     });
-
+    const data = await response.json();
     setWords(data);
-    console.log(data);
   };
 
   useEffect(() => {
@@ -43,13 +42,16 @@ const App = () => {
   }, []);
 
   const handleInputChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const target = event.target;
+    const target = event.currentTarget;
+    const value = target.value;
+
     if (target === null) {
       throw new Error("target can not be null");
     }
 
     setFormData({
       ...formData,
+      [target.name]: value,
     });
   };
 
@@ -57,7 +59,7 @@ const App = () => {
     event: React.SyntheticEvent
   ): Promise<void> => {
     event.preventDefault();
-    const target = event.currentTarget;
+    const target = event.target;
     if (target === null) {
       throw new Error("Target can not be null.");
     }
@@ -68,11 +70,11 @@ const App = () => {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
-        name: { value: name.value },
-        name_accent: { value: name_accent.value },
-        comment: { value: comment.value },
-        usage: { value: usage.value },
-        origin: { value: origin.value },
+        name: name.value,
+        name_accent: name_accent.value,
+        comment: comment.value,
+        usage: usage.value,
+        origin: origin.value,
       }),
     });
     fetchWords();

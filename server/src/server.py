@@ -4,14 +4,14 @@ from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from database import SessionLocal, engine
 import models
+import uvicorn
+import sys
 
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-origins = [
-    "http://localhost:5173",
-]
+origins = ["http://localhost:3000", "http://localhost:8000", "http://172.20.0.3:3000/"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -63,3 +63,14 @@ async def create_word(word: WordBase, db: db_dependency):
 async def get_words(db: db_dependency, skip: int = 0, limit: int = 100):
     words = db.query(models.Word).offset(skip).limit(limit).all()
     return words
+
+
+def main(argv=sys.argv[1:]):
+    try:
+        uvicorn.run("server:app", host="0.0.0.0", port=3001)
+    except KeyboardInterrupt:
+        pass
+
+
+if __name__ == "__main__":
+    main()
