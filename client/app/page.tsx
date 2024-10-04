@@ -1,5 +1,7 @@
+"use client";
+
 import { useState, useEffect } from "react";
-import api from "./api";
+import api from "./api/api";
 
 type Word = {
   id: number;
@@ -29,7 +31,7 @@ const App = () => {
   });
 
   const fetchWords = async () => {
-    const response = await api("words/", {
+    const response: any = await api("words/", {
       method: "GET",
       headers: { "content-type": "application/json" },
     });
