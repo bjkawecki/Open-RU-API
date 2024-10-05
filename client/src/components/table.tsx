@@ -24,7 +24,11 @@ export function Table({ words }: any) {
               <td className="p-5">{word.usage}</td>
               <td className="p-5">{word.origin}</td>
               <td className="p-5">
-                <Link href={`/words/${word.id}`} key={word.id}>
+                <Link
+                  href={`/words/${word.id}`}
+                  key={word.id}
+                  className="px-2 py-1 bg-blue-500 rounded text-white"
+                >
                   Details
                 </Link>
               </td>

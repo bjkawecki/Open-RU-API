@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { FormData } from "../app/types";
-import { api } from "../app/api/api";
+import { api } from "../api/api";
 
 interface FormProps {
   fetchWords: () => Promise<any>;

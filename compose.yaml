@@ -12,12 +12,12 @@ services:
 
   client:
     image: "node:22"
-    working_dir: /home/node/app
+    working_dir: /home/node
     environment:
       - NODE_ENV=development
       - WDS_SOCKET_PORT=0
     volumes:
-      - ./client/:/home/node/app
+      - ./client/:/home/node
     expose:
       - "3000"
     ports:
