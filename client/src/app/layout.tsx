@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Navbar } from "../components/navbar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,7 +14,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body>{children}</body>
+      <body className="">
+        <Navbar />
+        <div className="flex justify-center min-h-screen bg-gray-100">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }

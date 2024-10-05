@@ -1,8 +1,12 @@
 import { useState } from "react";
-import { FormData } from "../types";
-import { api } from "../api/api";
+import { FormData } from "../app/types";
+import { api } from "../app/api/api";
 
-export function Form({ fetchWords }: any) {
+interface FormProps {
+  fetchWords: () => Promise<any>;
+}
+
+export function Form({ fetchWords }: FormProps) {
   const handleFormSubmit = async (
     event: React.SyntheticEvent
   ): Promise<void> => {

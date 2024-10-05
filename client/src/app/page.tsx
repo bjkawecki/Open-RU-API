@@ -2,9 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Word } from "./types";
-import { Table } from "./components/table";
-import { Navbar } from "./components/navbar";
-import { Form } from "./components/form";
+import { Table } from "../components/table";
 
 const App = () => {
   const [words, setWords] = useState<Word[]>([]);
@@ -29,10 +27,9 @@ const App = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Navbar />
+    <div className="">
       <div className="flex justify-evenly mt-10 w-full">
-        <Form fetchWords={fetchWords} />
+        {/* <pre>{JSON.stringify(words, null, 2)}</pre> */}
         <Table words={words} />
       </div>
     </div>
