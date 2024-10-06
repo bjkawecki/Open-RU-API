@@ -28,3 +28,4 @@ dist-ssr
 *.sw?
 .next
 client/next-env.d.ts
+db.sqlite
