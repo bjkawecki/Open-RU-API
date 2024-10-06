@@ -1,13 +1,11 @@
-from fastapi import FastAPI, Depends
-from typing import List
+from fastapi import FastAPI, Depends, Path, HTTPException
+from typing import List, Annotated
 from contextlib import asynccontextmanager
-from db import init_db, get_session
-import uvicorn
-import sys
-from models import Word, WordBase
 from sqlmodel import Session
-
 from fastapi.middleware.cors import CORSMiddleware
+
+from src.models import Word, WordBase
+from src.db import init_db, get_session
 
 
 @asynccontextmanager
@@ -49,12 +47,11 @@ async def get_words(skip: int = 0, limit: int = 100, session: Session = Depends(
     return words
 
 
-def main(argv=sys.argv[1:]):
-    try:
-        uvicorn.run("server:app", host="0.0.0.0", port=3001)
-    except KeyboardInterrupt:
-        pass
-
-
-if __name__ == "__main__":
-    main()
+@app.get("/words/{word_id}")
+async def get_word_details(
+    word_id: Annotated[int, Path(title="Word ID")], session: Session = Depends(get_session)
+) -> Word:
+    word = session.get(Word, word_id)
+    if word is None:
+        raise HTTPException(status_code=404, detail="Word not found.")
+    return word

@@ -29,3 +29,4 @@ dist-ssr
 .next
 client/next-env.d.ts
 db.sqlite
+api.http
