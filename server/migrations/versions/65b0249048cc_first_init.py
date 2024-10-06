@@ -1,8 +1,8 @@
-"""initial migration
+"""first init
 
-Revision ID: 3d4bd0cb7898
+Revision ID: 65b0249048cc
 Revises: 
-Create Date: 2024-10-06 20:20:18.751271
+Create Date: 2024-10-06 21:51:20.196301
 
 """
 from typing import Sequence, Union
@@ -13,7 +13,7 @@ import sqlmodel
 
 
 # revision identifiers, used by Alembic.
-revision: str = '3d4bd0cb7898'
+revision: str = '65b0249048cc'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -24,9 +24,10 @@ def upgrade() -> None:
     op.create_table('word',
     sa.Column('name', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
     sa.Column('name_accent', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
-    sa.Column('comment', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
-    sa.Column('usage', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
-    sa.Column('origin', sqlmodel.sql.sqltypes.AutoString(), nullable=False),
+    sa.Column('word_class', sa.Enum('adjective', 'adverb', 'compound', 'conjunction', 'interjection', 'numeral', 'particle', 'phrase', 'preposition', 'pronoun', 'substantive', 'verb', name='wordclass'), nullable=True),
+    sa.Column('comment', sqlmodel.sql.sqltypes.AutoString(), nullable=True),
+    sa.Column('usage', sqlmodel.sql.sqltypes.AutoString(), nullable=True),
+    sa.Column('origin', sqlmodel.sql.sqltypes.AutoString(), nullable=True),
     sa.Column('id', sa.Integer(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )

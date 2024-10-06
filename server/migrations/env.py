@@ -3,8 +3,8 @@ from logging.config import fileConfig
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from sqlmodel import SQLModel
+from src.models.word import Word
 from alembic import context
-
 from pathlib import Path
 
 # this is the Alembic Config object, which provides
@@ -13,7 +13,6 @@ config = context.config
 
 DB_PATH = str((Path().parent / "db.sqlite").resolve())
 config.set_main_option("sqlalchemy.url", f"sqlite:///{DB_PATH}")
-
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 if config.config_file_name is not None:

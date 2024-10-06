@@ -3,7 +3,7 @@ from typing import List, Annotated
 from sqlmodel import Session
 from fastapi.middleware.cors import CORSMiddleware
 
-from src.models import Word, WordBase
+from src.models.word import Word, WordBase
 from src.db import get_session
 
 
