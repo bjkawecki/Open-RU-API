@@ -1,20 +1,13 @@
 from fastapi import FastAPI, Depends, Path, HTTPException
 from typing import List, Annotated
-from contextlib import asynccontextmanager
 from sqlmodel import Session
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.models import Word, WordBase
-from src.db import init_db, get_session
+from src.db import get_session
 
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    init_db()
-    yield
-
-
-app = FastAPI(lifespan=lifespan)
+app = FastAPI()
 
 origins = ["http://localhost:3000", "http://localhost:8000", "http://172.20.0.3:3000/"]
 
