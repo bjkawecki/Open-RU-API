@@ -27,10 +27,11 @@ services:
   server:
     image: todo-app/server
     build: ./server
+    working_dir: /usr/src/app/server/src
     volumes:
-      - ./server/:/usr/src/app
+      - ./server/src/:/usr/src/app/server/src
     expose:
       - "3001"
     ports:
-      - "3001:3001"
-    command: "python src/server.py"
+      - 3001:3001
+    command: uvicorn main:app --host 0.0.0.0 --port 3001 --reload
