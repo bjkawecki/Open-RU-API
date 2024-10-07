@@ -30,3 +30,4 @@ dist-ssr
 client/next-env.d.ts
 db.sqlite
 api.http
+migrations
