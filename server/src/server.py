@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends, Path, HTTPException
 from typing import List, Annotated
-from sqlmodel import Session
+from sqlmodel import Session, select
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.models.word import Word, WordBase
@@ -36,7 +36,7 @@ async def get_index() -> str:
 
 @app.get("/words/", response_model=List[Word])
 async def get_words(skip: int = 0, limit: int = 100, session: Session = Depends(get_session)):
-    words = session.query(Word).offset(skip).limit(limit).all()
+    words = session.exec(select(Word)).all()
     return words
 
 
@@ -48,3 +48,12 @@ async def get_word_details(
     if word is None:
         raise HTTPException(status_code=404, detail="Word not found.")
     return word
+
+
+@app.delete("/words/")
+async def delete_words(session: Session = Depends(get_session)):
+    words = session.exec(select(Word)).all()
+    for word in words:
+        session.delete(word)
+        session.commit()
+    return {"message": "Words successfully deleted."}

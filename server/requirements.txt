@@ -16,4 +16,5 @@ SQLAlchemy==2.0.35
 sqlmodel==0.0.22
 starlette==0.38.6
 typing_extensions==4.12.2
+uuid==1.30
 uvicorn==0.31.0

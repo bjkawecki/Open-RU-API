@@ -2,29 +2,29 @@ import enum
 from sqlmodel import SQLModel, Field, Column, Enum
 
 
-class Etymology(enum.Enum):
-    GERMAN = "German", "Deutsch"
-    ENGLISH = "English", "Englisch"
-    FRENCH = "French", "Französisch"
-    TURKISH = "Turkish", "Türkisch"
-    PERSIAN = "Persian", "Persisch"
-    DUTCH = "Dutch", "Niederländisch"
-    ARABIAN = "Arabian", "Arabisch"
-    ITALIAN = "Italian", "Italienisch"
-    LATIN = "Latin", "Latein"
-    GREEK = "Greek", "Altgriechisch"
-    CHURCH_SLAVONIC = "Church Slavonic", "Kirchenlslawisch"
+class Origin(enum.Enum):
+    German = "German"
+    English = "English"
+    French = "French"
+    Turkish = "Turkish"
+    Persian = "Persian"
+    Dutch = "Dutch"
+    Arabian = "Arabian"
+    Italian = "Italian"
+    Latin = "Latin"
+    Greek = "Greek"
+    Slavonic = "Church Slavonic"
 
 
 class Usage(enum.Enum):
-    SOPHISTICATED = "sophisticated", "gehoben"
-    COLLOQUIAL = "colloquial", "umgangssprachlich"
-    FORMAL = "formal", "förmlich"
-    MAT = "mat", "Mat"
-    ARCHAIC = "archaic", "veraltet"
-    POETIC = "poetic", "poetisch"
-    TERM = "term", "Fachwort"
-    ABRREVIATION = "abbreviation", "Abkürzung"
+    sophisticated = "sophisticated"
+    colloquial = "colloquial"
+    formal = "formal"
+    mat = "mat"
+    archaic = "archaic"
+    poetic = "poetic"
+    term = "term"
+    abbreviation = "abbreviation"
 
 
 class WordClass(enum.Enum):
@@ -44,18 +44,12 @@ class WordClass(enum.Enum):
 
 class WordBase(SQLModel):
 
-    name: str = Field(
-        nullable=False,
-        schema_extra={"pattern": r"^[\u0401\u0451\u0410-\u044f]+$"},
-    )
-    name_accent: str = Field(
-        nullable=False,
-        schema_extra={"pattern": r"^[\u0401\u0451\u0410-\u044f]+$"},
-    )
+    name: str = Field(nullable=False, schema_extra={"pattern": r"^[\u0401\u0451\u0410-\u044f]+$"})
+    name_accent: str = Field(nullable=False, schema_extra={"pattern": r"^[\u0401\u0451\u0410-\u044f]+$"})
     word_class: WordClass = Field(sa_column=Column(Enum(WordClass)))
     comment: str = Field(nullable=True)
-    usage: str = Field(nullable=True)
-    origin: str = Field(nullable=True)
+    usage: Usage | None = Field(None, sa_column=Column(Enum(Usage), nullable=True))
+    origin: Origin | None = Field(None, sa_column=Column(Enum(Origin), nullable=True))
 
 
 class Word(WordBase, table=True):
