@@ -5,7 +5,13 @@ from sqlmodel import Session, select
 from src.models.word import Word, WordBase
 from src.db import get_session
 
-router = APIRouter()
+router = APIRouter(tags=["Wörter"])
+
+
+@router.get("/words/", response_model=List[Word])
+async def get_words(skip: int = 0, limit: int = 100, session: Session = Depends(get_session)):
+    words = session.exec(select(Word)).all()
+    return words
 
 
 @router.post("/words/", response_model=Word)
@@ -17,15 +23,13 @@ async def create_word(word_data: WordBase, session: Session = Depends(get_sessio
     return word
 
 
-@router.get("/")
-async def get_index() -> str:
-    return "Welcome to Open Ru API"
-
-
-@router.get("/words/", response_model=List[Word])
-async def get_words(skip: int = 0, limit: int = 100, session: Session = Depends(get_session)):
+@router.delete("/words/")
+async def delete_words(session: Session = Depends(get_session)):
     words = session.exec(select(Word)).all()
-    return words
+    for word in words:
+        session.delete(word)
+        session.commit()
+    return {"message": "Words successfully deleted."}
 
 
 @router.get("/words/{word_id}")
@@ -36,12 +40,3 @@ async def get_word_details(
     if word is None:
         raise HTTPException(status_code=404, detail="Word not found.")
     return word
-
-
-@router.delete("/words/")
-async def delete_words(session: Session = Depends(get_session)):
-    words = session.exec(select(Word)).all()
-    for word in words:
-        session.delete(word)
-        session.commit()
-    return {"message": "Words successfully deleted."}
