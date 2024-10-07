@@ -44,7 +44,7 @@ class WordClass(enum.Enum):
 
 class TranslationBase(SQLModel):
     name: str
-    word_id: int | None = Field(default=None, foreign_key="word.id")
+    word_id: int | None = Field(default=None, foreign_key="word.id", nullable=False)
 
 
 class Translation(TranslationBase, table=True):
@@ -68,7 +68,7 @@ class Word(WordBase, table=True):
 
 
 class WordCreate(WordBase):
-    translations: list[Translation] | None
+    translations: list[Translation]
 
 
 class TranslationPublic(TranslationBase):
