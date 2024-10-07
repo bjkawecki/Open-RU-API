@@ -1,23 +1,34 @@
 from fastapi import Depends, Path, HTTPException, APIRouter
-from typing import List, Annotated
+from typing import Annotated
 from sqlmodel import Session, select
 
-from src.models.word import Word, WordBase
+from src.models.word import Word, WordCreate, Translation, WordWithTranslations
 from src.db import get_session
 
 router = APIRouter(tags=["Wörter"])
 
 
-@router.get("/words/", response_model=List[Word])
-async def get_words(skip: int = 0, limit: int = 100, session: Session = Depends(get_session)):
-    words = session.exec(select(Word)).all()
-    return words
+@router.get("/words/", response_model=list[WordWithTranslations])
+async def get_words(session: Session = Depends(get_session)):
+    word_list = session.exec(select(Word)).all()
+    return word_list
 
 
 @router.post("/words/", response_model=Word)
-async def create_word(word_data: WordBase, session: Session = Depends(get_session)) -> Word:
-    word = Word(**word_data.dict())
+async def create_word(word_data: WordCreate, session: Session = Depends(get_session)) -> Word:
+    word = Word(
+        name=word_data.name,
+        name_accent=word_data.name_accent,
+        word_class=word_data.word_class,
+        comment=word_data.comment,
+        usage=word_data.usage,
+        origin=word_data.origin,
+    )
     session.add(word)
+    if word_data.translations:
+        for translation in word_data.translations:
+            translation_obj = Translation(name=translation.name, word=word)
+            session.add(translation_obj)
     session.commit()
     session.refresh(word)
     return word
@@ -28,7 +39,7 @@ async def delete_words(session: Session = Depends(get_session)):
     words = session.exec(select(Word)).all()
     for word in words:
         session.delete(word)
-        session.commit()
+    session.commit()
     return {"message": "Words successfully deleted."}
 
 
