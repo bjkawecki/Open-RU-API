@@ -25,7 +25,7 @@ services:
     command: "npm run dev"
 
   server:
-    image: todo-app/server
+    image: python
     build: ./server
     working_dir: /usr/src/app/server
     volumes:
