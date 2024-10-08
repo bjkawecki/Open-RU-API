@@ -13,7 +13,7 @@ const App = () => {
       headers: { "content-type": "application/json" },
     };
     try {
-      const Res = await fetch(`http://localhost:3001/${"words/"}`, config);
+      const Res = await fetch(`http://localhost:4000/${"words/"}`, config);
       const words: Word[] = await Res.json();
       setWords(words);
     } catch (error) {

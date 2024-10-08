@@ -27,11 +27,11 @@ services:
   server:
     image: python:3.12
     build: ./server
-    working_dir: /usr/src/app/server
+    working_dir: /server/
     volumes:
-      - ./server/:/usr/src/app/server
+      - ./server:/server/
     expose:
-      - "3001"
+      - "4000"
     ports:
-      - 3001:3001
+      - 4000:4000
     command: python main.py --reload

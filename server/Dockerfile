@@ -1,10 +1,10 @@
 FROM python:3.12
 
-WORKDIR /usr/src/app
+WORKDIR /
 COPY requirements.txt ./
 
 RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
 
-EXPOSE 3001
+EXPOSE 4000
 
-CMD [ "uvicorn", "./src/server:app", "--reload" ]
+CMD [ "uvicorn", "server/src/server:app", "--reload" ]

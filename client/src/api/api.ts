@@ -1,6 +1,6 @@
 export async function api (endpoint: string, config: {}) {
     try {
-      const response = await fetch(`http://localhost:3001/${endpoint}`, config);
+      const response = await fetch(`http://localhost:4000/${endpoint}`, config);
       if (!response.ok) {
         throw new Error("Network response was not ok.");
       }

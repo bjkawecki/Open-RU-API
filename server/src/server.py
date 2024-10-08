@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from src.routers import index_router, translations_router, words_router
 from fastapi.middleware.cors import CORSMiddleware
 
-origins = ["http://localhost:3000", "http://localhost:8000", "http://172.20.0.3:3000/"]
+origins = ["http://localhost:3000", "http://localhost:8000"]
 
 app = FastAPI()
 app.add_middleware(
