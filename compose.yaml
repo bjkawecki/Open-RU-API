@@ -25,7 +25,7 @@ services:
     command: "npm run dev"
 
   server:
-    image: python
+    image: python:3.12
     build: ./server
     working_dir: /usr/src/app/server
     volumes:
