@@ -6,12 +6,13 @@ from src.db import get_session
 from src.models.word.word_db import Word
 from src.models.translation.translation_db import Translation
 from src.models.word.word_create import WordCreate
-from src.models.word.word_public import WordWithTranslations
+from src.models.word.word_public import WordPublic
+from src.models.props.props_db import AdjectiveProps
 
 router = APIRouter(tags=["Wörter"])
 
 
-@router.get("/words/", response_model=list[WordWithTranslations])
+@router.get("/words/", response_model=list[WordPublic])
 async def get_words_with_translations(session: Session = Depends(get_session)):
     word_list = session.exec(select(Word)).all()
     return word_list
@@ -32,6 +33,9 @@ async def create_word(word_data: WordCreate, session: Session = Depends(get_sess
         for translation in word_data.translations:
             translation_obj = Translation(name=translation.name, word=word)
             session.add(translation_obj)
+    if word_data.props:
+        props_obj = AdjectiveProps(is_gradable=word_data.props.is_gradable, word=word)
+        session.add(props_obj)
     session.commit()
     session.refresh(word)
     return word
