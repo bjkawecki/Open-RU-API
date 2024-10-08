@@ -3,9 +3,10 @@ from typing import Annotated
 from sqlmodel import Session, select
 
 from src.db import get_session
-from src.models.db_models import Word, Translation
-from src.models.create_models import WordCreate
-from src.models.public_models import WordWithTranslations
+from src.models.word.word_db import Word
+from src.models.translation.translation_db import Translation
+from src.models.word.word_create import WordCreate
+from src.models.word.word_public import WordWithTranslations
 
 router = APIRouter(tags=["Wörter"])
 
