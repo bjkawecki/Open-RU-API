@@ -2,8 +2,8 @@ from fastapi import Depends, Path, HTTPException, APIRouter
 from typing import Annotated
 from sqlmodel import Session, select
 
-from src.models.word import Word, WordCreate, Translation, WordWithTranslations
 from src.db import get_session
+from src.models.word_model import Word, WordCreate, Translation, WordWithTranslations
 
 router = APIRouter(tags=["Wörter"])
 
