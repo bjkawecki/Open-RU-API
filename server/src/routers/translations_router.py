@@ -1,7 +1,8 @@
 from fastapi import Depends, APIRouter
 from sqlmodel import Session, select
 
-from src.models.word_model import Translation, TranslationWithWord
+from src.models.db_models import Translation
+from src.models.public_models import TranslationWithWord
 from src.db import get_session
 
 router = APIRouter(tags=["Übersetzungen"])
