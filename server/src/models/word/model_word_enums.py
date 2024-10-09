@@ -1,7 +1,7 @@
-import enum
+from enum import Enum
 
 
-class Origin(enum.Enum):
+class Origin(str, Enum):
     German = "German"
     English = "English"
     French = "French"
@@ -15,7 +15,7 @@ class Origin(enum.Enum):
     Slavonic = "Church Slavonic"
 
 
-class Usage(enum.Enum):
+class Usage(str, Enum):
     sophisticated = "sophisticated"
     colloquial = "colloquial"
     formal = "formal"
@@ -26,7 +26,7 @@ class Usage(enum.Enum):
     abbreviation = "abbreviation"
 
 
-class WordClass(enum.Enum):
+class WordClass(str, Enum):
     adjective = "adjective"
     adverb = "adverb"
     compound = "compound"
