@@ -1,5 +1,5 @@
 from fastapi import Depends, APIRouter
-from sqlmodel import Session, select
+from sqlmodel import Session
 
 from src.db import get_session
 from src.models.word.model_word_db import Word
@@ -7,14 +7,9 @@ from src.models.translation.model_translation_db import Translation
 from src.models.word.model_word_create import WordCreate
 from src.models.word.model_word_public import WordPublic
 from src.models.props.model_props_db.model_props_db_adjective import AdjectiveProps
+from src.models.props.model_props_db.model_props_db_substantive import SubstantiveProps
 
 router = APIRouter(tags=["Wörter"])
-
-
-@router.get("/words/", response_model=list[WordPublic], response_model_exclude_none=True)
-async def get_words_with_translations(session: Session = Depends(get_session)):
-    word_list = session.exec(select(Word)).all()
-    return word_list
 
 
 @router.post("/words/", response_model=WordPublic, response_model_exclude_none=True)
@@ -32,9 +27,14 @@ async def create_word(word_data: WordCreate, session: Session = Depends(get_sess
         for translation in word_data.translations:
             translation_obj = Translation(name=translation.name, word=word)
             session.add(translation_obj)
-    if word_data.adjective_props:
-        props_obj = AdjectiveProps(is_gradable=word_data.props.is_gradable, word=word)
+
+    if word.word_class == "adjective" and word_data.adjective_props:
+        props_obj = AdjectiveProps(**word_data.adjective_props.dict(), word=word)
         session.add(props_obj)
+    elif word.word_class == "substantive" and word_data.substantive_props:
+        props_obj = SubstantiveProps(**word_data.substantive_props.dict(), word=word)
+        session.add(props_obj)
+
     session.commit()
     session.refresh(word)
     return word
