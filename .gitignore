@@ -31,3 +31,4 @@ client/next-env.d.ts
 db.sqlite
 api.http
 migrations
+todo.md
