@@ -1,6 +1,6 @@
 from sqlmodel import Field, Relationship
-from src.models.word.word_db import Word
-from src.models.translation.translation_base import TranslationBase
+from src.models.word.model_word_db import Word
+from src.models.translation.model_translation_base import TranslationBase
 
 
 class Translation(TranslationBase, table=True):

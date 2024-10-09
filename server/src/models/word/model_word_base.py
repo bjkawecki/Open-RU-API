@@ -1,6 +1,6 @@
 from sqlmodel import SQLModel, Field, Column, Enum
 
-from src.models.word.enums import Origin, Usage, WordClass
+from src.models.word.model_word_enums import Origin, Usage, WordClass
 
 
 class WordBase(SQLModel):
