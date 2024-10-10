@@ -9,9 +9,9 @@ router = APIRouter(tags=["Übersetzungen"])
 
 
 @router.delete("/translations/")
-async def delete_translations(session: Session = Depends(get_session)):
-    translations = session.exec(select(Translation)).all()
-    for translation in translations:
+async def delete_all_translations(session: Session = Depends(get_session)):
+    translation_list = session.exec(select(Translation)).all()
+    for translation in translation_list:
         session.delete(translation)
         session.commit()
     return {"message": "Translations successfully deleted."}

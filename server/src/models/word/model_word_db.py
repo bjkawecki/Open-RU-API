@@ -11,6 +11,6 @@ if TYPE_CHECKING:
 
 class Word(WordBase, table=True):
     id: int = Field(default=None, primary_key=True)
-    translations: list["Translation"] = Relationship(back_populates="word", cascade_delete=True)
-    adjective_props: AdjectiveProps | None = Relationship(back_populates="word", cascade_delete=True)
-    substantive_props: SubstantiveProps | None = Relationship(back_populates="word", cascade_delete=True)
+    translation_list: list["Translation"] = Relationship(back_populates="word", cascade_delete=True)
+    adjective_props_obj: AdjectiveProps | None = Relationship(back_populates="word", cascade_delete=True)
+    substantive_props_obj: SubstantiveProps | None = Relationship(back_populates="word", cascade_delete=True)

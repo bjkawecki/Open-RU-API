@@ -9,4 +9,4 @@ if TYPE_CHECKING:
 class SubstantiveProps(PropsBase, table=True):
     is_alive: bool
     id: int = Field(default=None, primary_key=True)
-    word: "Word" = Relationship(sa_relationship_kwargs={"uselist": False}, back_populates="substantive_props")
+    word: "Word" = Relationship(sa_relationship_kwargs={"uselist": False}, back_populates="substantive_props_obj")

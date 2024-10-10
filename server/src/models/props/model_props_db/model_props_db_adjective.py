@@ -9,4 +9,4 @@ if TYPE_CHECKING:
 class AdjectiveProps(PropsBase, table=True):
     is_gradable: bool
     id: int = Field(default=None, primary_key=True)
-    word: "Word" = Relationship(sa_relationship_kwargs={"uselist": False}, back_populates="adjective_props")
+    word: "Word" = Relationship(sa_relationship_kwargs={"uselist": False}, back_populates="adjective_props_obj")

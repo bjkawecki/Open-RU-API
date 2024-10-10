@@ -9,7 +9,7 @@ router = APIRouter(tags=["Wörter"])
 
 
 @router.get("/words/", response_model=list[WordPublic], response_model_exclude_none=True)
-async def get_words_with_translations(session: Session = Depends(get_session)):
+async def get_words_with_translation_list(session: Session = Depends(get_session)):
     word_list = session.exec(select(Word)).all()
     return word_list
 
