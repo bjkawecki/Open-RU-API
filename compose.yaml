@@ -1,5 +1,23 @@
 name: words
 services:
+
+  openru-db:
+    image: postgres:17.0-bookworm
+    restart: "no"
+    ports:
+      - 5432:5432
+    env_file:
+      - ./.env
+    volumes:
+      - ./db/scripts:/docker-entrypoint-initdb.d
+
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+
+
   nginx:
     image: nginx:1.17
     restart: on-failure:5
@@ -8,10 +26,10 @@ services:
     ports:
       - 8000:80
     depends_on:
-      - server
-      - client
+      - fastapi
+      - nextjs
 
-  client:
+  nextjs:
     image: "node:22"
     restart: unless-stopped
     working_dir: /home/node
@@ -26,10 +44,10 @@ services:
       - "3000:3000"
     command: "npm run dev"
 
-  server:
+  fastapi:
     image: python:3.12
     restart: unless-stopped
-    build: ./server
+    build: ./server/
     working_dir: /server/
     volumes:
       - ./server:/server/
