@@ -8,7 +8,7 @@ router = APIRouter(tags=["Wörter"])
 
 @router.delete("/words/")
 async def delete_words(session: Session = Depends(get_session)):
-    words = session.exec(select(WordModel)).all()
+    words = session.query(WordModel).all()
     for word in words:
         session.delete(word)
     session.commit()

@@ -1,12 +1,13 @@
 from typing import Optional
 
 from sqlalchemy import ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from src.enums.props import DeclinationClass, Genus, Stress
-from src.models.props.base import PropsModel
+from src.models.props_base import PropsModel
+from src.models.word import WordModel
 
 
-class SubstantiveProps(PropsModel):
+class SubstantivePropsModel(PropsModel):
     __tablename__ = "substantive_props_table"
 
     id: Mapped[int] = mapped_column(ForeignKey("props_table.id"), primary_key=True)
@@ -35,3 +36,7 @@ class SubstantiveProps(PropsModel):
 
     partitive: Mapped[Optional[str]]
     locative: Mapped[Optional[str]]
+
+    __mapper_args__ = {
+        "polymorphic_identity": "substantive_props",
+    }

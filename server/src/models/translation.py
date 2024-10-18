@@ -5,7 +5,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from src.db_connection import Base
 
 if TYPE_CHECKING:
-    from src.models.word.model_word_db import WordModel
+    from src.models.word import WordModel
 
 
 class TranslationModel(Base):

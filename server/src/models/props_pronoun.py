@@ -2,15 +2,17 @@ from typing import Optional
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
-from src.models.props.base import PropsModel
+from src.enums.props import DeclinationType, PronounType
+from src.models.props_base import PropsModel
 
 
-class AdjectiveProps(PropsModel):
-    __tablename__ = "adjective_props_table"
+class PronounPropsModel(PropsModel):
+    __tablename__ = "pronoun_props_table"
 
     id: Mapped[int] = mapped_column(ForeignKey("props_table.id"), primary_key=True)
 
-    is_gradable: Mapped[bool] = mapped_column(default=True)
+    declination_type: Mapped[DeclinationType]
+    pronoun_type: Mapped[PronounType]
 
     masculine_nominative: Mapped[Optional[str]]
     masculine_genitive: Mapped[Optional[str]]
@@ -33,21 +35,16 @@ class AdjectiveProps(PropsModel):
     neutral_instrumental: Mapped[Optional[str]]
     neutral_prepositive: Mapped[Optional[str]]
 
+    singular_nominative: Mapped[Optional[str]]
+    singular_genitive: Mapped[Optional[str]]
+    singular_dative: Mapped[Optional[str]]
+    singular_accusative: Mapped[Optional[str]]
+    singular_instrumental: Mapped[Optional[str]]
+    singular_prepositive: Mapped[Optional[str]]
+
     plural_nominative: Mapped[Optional[str]]
     plural_genitive: Mapped[Optional[str]]
     plural_dative: Mapped[Optional[str]]
     plural_accusative: Mapped[Optional[str]]
     plural_instrumental: Mapped[Optional[str]]
     plural_prepositive: Mapped[Optional[str]]
-
-    shortform_masculine: Mapped[Optional[str]]
-    shortform_feminine: Mapped[Optional[str]]
-    shortform_neutral: Mapped[Optional[str]]
-    shortform_plural: Mapped[Optional[str]]
-
-    comparative: Mapped[Optional[str]]
-    superlative: Mapped[Optional[str]]
-
-    __mapper_args__ = {
-        "polymorphic_identity": "adjective_props",
-    }

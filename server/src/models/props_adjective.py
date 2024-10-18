@@ -1,18 +1,17 @@
 from typing import Optional
 
 from sqlalchemy import ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column
-from src.enums.props import DeclinationType, NumeralType
-from src.models.props.base import PropsModel
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from src.models.props_base import PropsModel
+from src.models.word import WordModel
 
 
-class NumeralProps(PropsModel):
-    __tablename__ = "numeral_props_table"
+class AdjectivePropsModel(PropsModel):
+    __tablename__ = "adjective_props_table"
 
     id: Mapped[int] = mapped_column(ForeignKey("props_table.id"), primary_key=True)
 
-    numeral_type: Mapped[NumeralType]
-    declination_type: Mapped[DeclinationType]
+    is_gradable: Mapped[bool] = mapped_column(default=True)
 
     masculine_nominative: Mapped[Optional[str]]
     masculine_genitive: Mapped[Optional[str]]
@@ -35,16 +34,21 @@ class NumeralProps(PropsModel):
     neutral_instrumental: Mapped[Optional[str]]
     neutral_prepositive: Mapped[Optional[str]]
 
-    singular_nominative: Mapped[Optional[str]]
-    singular_genitive: Mapped[Optional[str]]
-    singular_dative: Mapped[Optional[str]]
-    singular_accusative: Mapped[Optional[str]]
-    singular_instrumental: Mapped[Optional[str]]
-    singular_prepositive: Mapped[Optional[str]]
-
     plural_nominative: Mapped[Optional[str]]
     plural_genitive: Mapped[Optional[str]]
     plural_dative: Mapped[Optional[str]]
     plural_accusative: Mapped[Optional[str]]
     plural_instrumental: Mapped[Optional[str]]
     plural_prepositive: Mapped[Optional[str]]
+
+    shortform_masculine: Mapped[Optional[str]]
+    shortform_feminine: Mapped[Optional[str]]
+    shortform_neutral: Mapped[Optional[str]]
+    shortform_plural: Mapped[Optional[str]]
+
+    comparative: Mapped[Optional[str]]
+    superlative: Mapped[Optional[str]]
+
+    __mapper_args__ = {
+        "polymorphic_identity": "adjective_props",
+    }

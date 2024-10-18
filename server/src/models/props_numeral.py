@@ -2,17 +2,17 @@ from typing import Optional
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
-from src.enums.props import DeclinationType, PronounType
-from src.models.props.base import PropsModel
+from src.enums.props import DeclinationType, NumeralType
+from src.models.props_base import PropsModel
 
 
-class PronounProps(PropsModel):
-    __tablename__ = "pronoun_props_table"
+class NumeralPropsModel(PropsModel):
+    __tablename__ = "numeral_props_table"
 
     id: Mapped[int] = mapped_column(ForeignKey("props_table.id"), primary_key=True)
 
+    numeral_type: Mapped[NumeralType]
     declination_type: Mapped[DeclinationType]
-    pronoun_type: Mapped[PronounType]
 
     masculine_nominative: Mapped[Optional[str]]
     masculine_genitive: Mapped[Optional[str]]
