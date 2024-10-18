@@ -1,7 +1,7 @@
 from sqlmodel import Session, SQLModel, create_engine
 
 DATABASE_URL = "sqlite:///db.sqlite"
-# DATABASE_URL = "postgresql+psycopg2://postgres:bjoern@127.0.0.1:5432/trainer_docker_dev"
+# DATABASE_URL = "postgresql+psycopg2://postgres:postgres@127.0.0.1:5432/words"
 
 engine = create_engine(DATABASE_URL, echo=True)
 
