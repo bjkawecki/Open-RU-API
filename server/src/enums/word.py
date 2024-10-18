@@ -2,17 +2,17 @@ from enum import Enum
 
 
 class Origin(str, Enum):
-    German = "German"
-    English = "English"
-    French = "French"
-    Turkish = "Turkish"
-    Persian = "Persian"
-    Dutch = "Dutch"
-    Arabian = "Arabian"
-    Italian = "Italian"
-    Latin = "Latin"
-    Greek = "Greek"
-    Slavonic = "Church Slavonic"
+    GERMAN = "German"
+    ENGLISCH = "English"
+    FRENCH = "French"
+    TURKISH = "Turkish"
+    PERSIAN = "Persian"
+    DUTCH = "Dutch"
+    ARABIAN = "Arabian"
+    ITALIAN = "Italian"
+    LATIN = "Latin"
+    GREEK = "Greek"
+    SLAVONIC = "Church Slavonic"
 
 
 class Usage(str, Enum):

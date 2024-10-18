@@ -1,10 +1,9 @@
-from fastapi import APIRouter, Depends
-from sqlmodel import Session, select
-from src.db_connection import get_session
-from src.models.translation.model_translation_db import Translation
-from src.models.translation.model_translation_public import TranslationWithWord
-
-router = APIRouter(tags=["Übersetzungen"])
+from fastapi import Depends
+from sqlalchemy import select
+from src.db_connection import Session, get_session
+from src.models.translation import Translation
+from src.routers import translations_router as router
+from src.schema.translation import TranslationWithWord
 
 
 @router.delete("/translations/")

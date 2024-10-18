@@ -1,7 +1,4 @@
-from fastapi import APIRouter
-
-
-router = APIRouter(tags=["Index"])
+from src.routers import index_router as router
 
 
 @router.get("/")

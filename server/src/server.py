@@ -13,10 +13,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-app.include_router(index_router.router)
+app.include_router(index_router)
 
 app.include_router(words_create.router)
 app.include_router(words_delete.router)
 app.include_router(words_read.router)
 
-app.include_router(translations_router.router)
+app.include_router(translations_router)
