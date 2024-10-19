@@ -1,6 +1,6 @@
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
-from src.models.enums.props import PreopsitionCase, PrepositionType
+from src.enums.props import PreopsitionCase, PrepositionType
 from src.models.props_base import PropsModel
 
 

@@ -49,5 +49,5 @@ class AdjectivePropsModel(PropsModel):
     superlative: Mapped[Optional[str]]
 
     __mapper_args__ = {
-        "polymorphic_identity": "adjective_props",
+        "polymorphic_identity": "adjective",
     }

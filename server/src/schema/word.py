@@ -1,7 +1,7 @@
 from typing import List, Optional, Union
 
 from pydantic import BaseModel, Field
-from src.schema.enums.word import Origin, Usage, WordClass
+from src.enums.word import Origin, Usage, WordClass
 from src.schema.props_adjective import AdjectivePropsBaseSchema
 from src.schema.props_substantive import SubstantivePropsBaseSchema
 from src.schema.translation import TranslationBaseSchema

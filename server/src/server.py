@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from src.routers import index_router, translations_router
-from src.routers.words_router import words_create, words_delete, words_read
+from src.routers.words import words_create, words_delete, words_read
 
 origins = ["http://localhost:3000", "http://localhost:8000"]
 

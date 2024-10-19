@@ -2,7 +2,7 @@ from typing import Optional
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from src.db_connection import Base
-from src.models.enums.word import Origin, Usage, WordClass
+from src.enums.word import Origin, Usage, WordClass
 from src.models.props_base import PropsModel
 from src.models.translation import TranslationModel
 

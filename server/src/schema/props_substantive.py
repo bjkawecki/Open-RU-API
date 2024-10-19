@@ -1,7 +1,7 @@
 from typing import Literal, Optional
 
 from pydantic import BaseModel
-from src.schema.enums.props import DeclinationClass, Genus, Stress
+from src.enums.props import DeclinationClass, Genus, Stress
 
 
 class SubstantivePropsBaseSchema(BaseModel, use_enum_values=True):
