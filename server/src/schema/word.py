@@ -1,9 +1,8 @@
-from typing import Dict, List, Optional, Union
+from typing import List, Optional, Union
 
 from pydantic import BaseModel, Field
-from src.enums.word import Origin, Usage, WordClass
+from src.schema.enums.word import Origin, Usage, WordClass
 from src.schema.props_adjective import AdjectivePropsBaseSchema
-from src.schema.props_base import PropsBaseSchema
 from src.schema.props_substantive import SubstantivePropsBaseSchema
 from src.schema.translation import TranslationBaseSchema
 
@@ -20,11 +19,11 @@ class WordBaseSchema(BaseModel, use_enum_values=True):
     usage: Optional[Usage] = None
 
 
-class WordCreateSchema(WordBaseSchema):
+class WordCreateSchema(WordBaseSchema, use_enum_values=True):
     translations: List[TranslationBaseSchema]
-    props: Optional[
-        Union[AdjectivePropsBaseSchema, SubstantivePropsBaseSchema, PropsBaseSchema]
-    ] = None
+    props: Optional[Union[AdjectivePropsBaseSchema, SubstantivePropsBaseSchema]] = (
+        Field(discriminator="props_type")
+    )
 
 
 class WordPublicSchema(WordCreateSchema):

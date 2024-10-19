@@ -1,9 +1,8 @@
 from typing import Optional
 
 from sqlalchemy import ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column
 from src.models.props_base import PropsModel
-from src.models.word import WordModel
 
 
 class AdjectivePropsModel(PropsModel):

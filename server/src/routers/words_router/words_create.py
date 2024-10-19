@@ -1,10 +1,12 @@
 from fastapi import APIRouter, Depends
 from src.db_connection import Session, get_session
+from src.models.enums.word import WordClass
 from src.models.props_adjective import AdjectivePropsModel
+from src.models.props_base import PropsModel
 from src.models.props_substantive import SubstantivePropsModel
 from src.models.translation import TranslationModel
 from src.models.word import WordModel
-from src.schema.word import WordBaseSchema, WordCreateSchema, WordPublicSchema
+from src.schema.word import WordCreateSchema, WordPublicSchema
 
 router = APIRouter(tags=["Wörter"])
 
@@ -15,10 +17,7 @@ def add_props(sent_word_data: WordCreateSchema, new_word_obj: WordPublicSchema):
             **sent_word_data.props.dict(), word_id=new_word_obj.id
         )
 
-    elif (
-        new_word_obj.word_class == "substantive"
-        and sent_word_data.substantive_props_obj
-    ):
+    elif new_word_obj.word_class == "substantive":
         return SubstantivePropsModel(
             **sent_word_data.substantive_props_obj.dict(), word_id=new_word_obj.id
         )
@@ -28,6 +27,7 @@ def add_props(sent_word_data: WordCreateSchema, new_word_obj: WordPublicSchema):
 async def create_word(
     sent_word_data: WordCreateSchema, session: Session = Depends(get_session)
 ):
+    print("SENT: ", sent_word_data)
     new_word_obj = WordModel(
         name=sent_word_data.name,
         name_accent=sent_word_data.name_accent,
@@ -46,7 +46,16 @@ async def create_word(
         )
         session.add(new_translation_obj)
 
-    props_obj = add_props(sent_word_data=sent_word_data, new_word_obj=new_word_obj)
+    # props_obj = add_props(sent_word_data=sent_word_data, new_word_obj=new_word_obj)
+    props_obj = {}
+    if new_word_obj.word_class == WordClass.adjective:
+        props_obj = AdjectivePropsModel(
+            **sent_word_data.props.dict(), word_id=new_word_obj.id
+        )
+    elif new_word_obj.word_class == WordClass.substantive:
+        props_obj = SubstantivePropsModel(
+            **sent_word_data.props.dict(), word_id=new_word_obj.id
+        )
     if props_obj:
         session.add(props_obj)
 

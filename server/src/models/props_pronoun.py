@@ -2,7 +2,7 @@ from typing import Optional
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
-from src.enums.props import DeclinationType, PronounType
+from src.models.enums.props import DeclinationType, PronounType
 from src.models.props_base import PropsModel
 
 

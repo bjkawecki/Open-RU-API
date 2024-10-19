@@ -1,9 +1,10 @@
-from typing import Optional
+from typing import Literal, Optional
 
 from pydantic import BaseModel
 
 
 class AdjectivePropsBaseSchema(BaseModel):
+    props_type: Literal["adjective"]
     is_gradable: bool
 
     masculine_nominative: Optional[str] = None

@@ -1,28 +1,37 @@
+from typing import Literal, Optional
+
 from pydantic import BaseModel
+from src.schema.enums.props import DeclinationClass, Genus, Stress
 
 
-class SubstantivePropsBaseSchema(BaseModel):
-    genus: str
-    declination_class: str
-    stress: str
+class SubstantivePropsBaseSchema(BaseModel, use_enum_values=True):
+    props_type: Literal["substantive"]
 
-    is_alive: bool
-    is_singular_tantum: bool
-    is_plural_tantum: bool
+    genus: Genus
+    declination_class: DeclinationClass
+    stress: Stress
 
-    singular_nominative: str
-    singular_genitive: str
-    singular_dative: str
-    singular_accusative: str
-    singular_instrumental: str
-    singular_prepositive: str
+    is_alive: Optional[bool] = None
+    is_singular_tantum: Optional[bool] = None
+    is_plural_tantum: Optional[bool] = None
 
-    plural_nominative: str
-    plural_genitive: str
-    plural_dative: str
-    plural_accusative: str
-    plural_instrumental: str
-    plural_prepositive: str
+    singular_nominative: Optional[str] = None
+    singular_genitive: Optional[str] = None
+    singular_dative: Optional[str] = None
+    singular_accusative: Optional[str] = None
+    singular_instrumental: Optional[str] = None
+    singular_prepositive: Optional[str] = None
 
-    partitive: str
-    locative: str
+    plural_nominative: Optional[str] = None
+    plural_genitive: Optional[str] = None
+    plural_dative: Optional[str] = None
+    plural_accusative: Optional[str] = None
+    plural_instrumental: Optional[str] = None
+    plural_prepositive: Optional[str] = None
+
+    partitive: Optional[str] = None
+    locative: Optional[str] = None
+
+
+class SubstantivePropsCreateSchema(SubstantivePropsBaseSchema):
+    id: int
