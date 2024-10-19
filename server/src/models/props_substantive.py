@@ -3,10 +3,10 @@ from typing import Optional
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 from src.enums.props import DeclinationClass, Genus, Stress
-from src.models.props_base import PropsModel
+from src.models.props_base import Props
 
 
-class SubstantivePropsModel(PropsModel):
+class SubstantiveProps(Props):
     __tablename__ = "substantive_props_table"
 
     id: Mapped[int] = mapped_column(ForeignKey("props_table.id"), primary_key=True)
@@ -37,5 +37,5 @@ class SubstantivePropsModel(PropsModel):
     locative: Mapped[Optional[str]]
 
     __mapper_args__ = {
-        "polymorphic_identity": "substantive_props",
+        "polymorphic_identity": "substantive",
     }

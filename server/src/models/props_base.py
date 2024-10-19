@@ -5,15 +5,15 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from src.db_connection import Base
 
 if TYPE_CHECKING:
-    from src.models.word import WordModel
+    from src.models.word import Word
 
 
-class PropsModel(Base):
+class Props(Base):
     __tablename__ = "props_table"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     word_id: Mapped[int] = mapped_column(ForeignKey("word_table.id"))
-    word: Mapped["WordModel"] = relationship(back_populates="props", single_parent=True)
+    word: Mapped["Word"] = relationship(back_populates="props", single_parent=True)
     props_type: Mapped[str]
 
     __mapper_args__ = {

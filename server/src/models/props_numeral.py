@@ -3,10 +3,10 @@ from typing import Optional
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 from src.enums.props import DeclinationType, NumeralType
-from src.models.props_base import PropsModel
+from src.models.props_base import Props
 
 
-class NumeralPropsModel(PropsModel):
+class NumeralProps(Props):
     __tablename__ = "numeral_props_table"
 
     id: Mapped[int] = mapped_column(ForeignKey("props_table.id"), primary_key=True)

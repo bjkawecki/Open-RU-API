@@ -3,10 +3,10 @@ from typing import Optional
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 from src.enums.props import Aspect, ConjugationClass, Direction, ObjectCase
-from src.models.props_base import PropsModel
+from src.models.props_base import Props
 
 
-class VerbPropsModel(PropsModel):
+class VerbProps(Props):
     __tablename__ = "verb_props_table"
 
     id: Mapped[int] = mapped_column(ForeignKey("props_table.id"), primary_key=True)

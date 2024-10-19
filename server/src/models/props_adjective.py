@@ -2,10 +2,10 @@ from typing import Optional
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
-from src.models.props_base import PropsModel
+from src.models.props_base import Props
 
 
-class AdjectivePropsModel(PropsModel):
+class AdjectiveProps(Props):
     __tablename__ = "adjective_props_table"
 
     id: Mapped[int] = mapped_column(ForeignKey("props_table.id"), primary_key=True)
@@ -49,5 +49,5 @@ class AdjectivePropsModel(PropsModel):
     superlative: Mapped[Optional[str]]
 
     __mapper_args__ = {
-        "polymorphic_identity": "adjective_props",
+        "polymorphic_identity": "adjective",
     }

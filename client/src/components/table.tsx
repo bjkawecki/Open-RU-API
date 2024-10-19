@@ -1,41 +1,33 @@
 import Link from "next/link";
-import { Word } from "../app/types";
+import { WordClass } from "../app/enums";
+import { Translation, Word } from "../app/types";
 
 export function Table({ words }: any) {
   return (
-    <div className="w-1/2 text-gray-500">
-      <table className="w-full text-sm text-left  rounded table-fixed rtl:text-right">
-        <thead className="text-xs text-gray-700 uppercase bg-white rounded border-b">
-          <tr>
-            <th className="p-5">Wort</th>
-            <th className="p-5">Mit Akzent</th>
-            <th className="p-5">Kommentar</th>
-            <th className="p-5">Gebrauch</th>
-            <th className="p-5">Herkunft</th>
-            <th className="p-5">Details</th>
-          </tr>
-        </thead>
-        <tbody>
-          {words.map((word: Word) => (
-            <tr key={word.id} className="bg-white border-b">
-              <td className="p-5">{word.name}</td>
-              <td className="p-5">{word.name_accent}</td>
-              <td className="p-5">{word.comment}</td>
-              <td className="p-5">{word.usage}</td>
-              <td className="p-5">{word.origin}</td>
-              <td className="p-5">
-                <Link
-                  href={`/words/${word.id}`}
-                  key={word.id}
-                  className="px-2 py-1 bg-blue-500 rounded text-white"
-                >
-                  Details
-                </Link>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="flex justify-center w-screen text-left">
+      <div className="flex-row w-1/2 text-sm shadow">
+        <div className="flex justify-between p-5 font-medium text-white uppercase bg-blue-500 border-b">
+          <div className="basis-1/3">Russisch</div>
+          <div className="basis-1/3">Wortart</div>
+          <div className="basis-1/3">Deutsch</div>
+        </div>
+        {words.map((word: Word) => (
+          <Link
+            href={`/words/${word.id}`}
+            key={word.id}
+            className="flex justify-between p-5 text-gray-700 bg-gray-50 border-b hover:bg-blue-50"
+          >
+            <div className="basis-1/3">{word.name_accent}</div>
+            <div className="basis-1/3">{WordClass[word.word_class]}</div>
+            <div className="basis-1/3">
+              {word.translations.map(
+                (translation: Translation, index: number) =>
+                  (index ? ", " : "") + translation.name
+              )}
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

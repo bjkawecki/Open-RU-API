@@ -32,5 +32,4 @@ class SubstantivePropsBaseSchema(BaseModel):
 
 
 class SubstantivePropsCreateSchema(SubstantivePropsBaseSchema):
-    id: int
-    props_type: Literal["substantive_props"]
+    props_type: Literal["substantive"]

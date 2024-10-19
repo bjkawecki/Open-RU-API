@@ -15,9 +15,9 @@ type Props = {
 
 export default function WordDetails({ params }: Props) {
   return (
-    <div className="flex flex-col space-y-5 items-start m-10">
+    <div className="flex flex-col items-start m-10 space-y-5">
       <h1 className="text-2xl">Details of word {params.wordId}</h1>
-      <Link href={`/`} className="bg-yellow-400 px-3 py-2 rounded">
+      <Link href={`/`} className="py-2 px-3 bg-yellow-400 rounded">
         Zurück
       </Link>
     </div>

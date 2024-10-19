@@ -44,4 +44,4 @@ class AdjectivePropsBaseSchema(BaseModel):
 
 
 class AdjectivePropsCreateSchema(AdjectivePropsBaseSchema):
-    props_type: Literal["adjective_props"]
+    props_type: Literal["adjective"]

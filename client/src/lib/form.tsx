@@ -131,7 +131,7 @@ export function Form({ fetchWords }: FormProps) {
         <div className="flex justify-end">
           <button
             type="submit"
-            className="px-3 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 focus:ring-blue-200 focus:outline-none focus:ring-2"
+            className="py-2 px-3 text-white bg-blue-500 rounded hover:bg-blue-600 focus:ring-blue-200 focus:outline-none focus:ring-2"
           >
             Senden
           </button>

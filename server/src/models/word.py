@@ -3,11 +3,11 @@ from typing import Optional
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from src.db_connection import Base
 from src.enums.word import Origin, Usage, WordClass
-from src.models.props_base import PropsModel
-from src.models.translation import TranslationModel
+from src.models.props_base import Props
+from src.models.translation import Translation
 
 
-class WordModel(Base):
+class Word(Base):
     __tablename__ = "word_table"
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -21,10 +21,10 @@ class WordModel(Base):
     usage: Mapped[Optional[Usage]]
     origin: Mapped[Optional[Origin]]
 
-    props: Mapped[Optional["PropsModel"]] = relationship(
+    props: Mapped[Optional["Props"]] = relationship(
         back_populates="word", cascade="all, delete-orphan"
     )
 
-    translations: Mapped[Optional[list["TranslationModel"]]] = relationship(
+    translations: Mapped[Optional[list["Translation"]]] = relationship(
         back_populates="word", cascade="all, delete-orphan"
     )
