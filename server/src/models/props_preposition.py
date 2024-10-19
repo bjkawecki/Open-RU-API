@@ -11,3 +11,7 @@ class PrepositionPropsModel(PropsModel):
 
     preposition_case: Mapped[PreopsitionCase]
     preposition_type: Mapped[PrepositionType]
+
+    __mapper_args__ = {
+        "polymorphic_identity": "preposition",
+    }

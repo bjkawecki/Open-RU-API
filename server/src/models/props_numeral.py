@@ -48,3 +48,7 @@ class NumeralPropsModel(PropsModel):
     plural_accusative: Mapped[Optional[str]]
     plural_instrumental: Mapped[Optional[str]]
     plural_prepositive: Mapped[Optional[str]]
+
+    __mapper_args__ = {
+        "polymorphic_identity": "numeral",
+    }

@@ -56,3 +56,7 @@ class VerbPropsModel(PropsModel):
 
     imperative_singular: Mapped[Optional[str]]
     imperative_plural: Mapped[Optional[str]]
+
+    __mapper_args__ = {
+        "polymorphic_identity": "verb",
+    }

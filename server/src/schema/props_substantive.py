@@ -4,9 +4,7 @@ from pydantic import BaseModel
 from src.enums.props import DeclinationClass, Genus, Stress
 
 
-class SubstantivePropsBaseSchema(BaseModel, use_enum_values=True):
-    props_type: Literal["substantive"]
-
+class SubstantivePropsBaseSchema(BaseModel):
     genus: Genus
     declination_class: DeclinationClass
     stress: Stress
@@ -35,3 +33,4 @@ class SubstantivePropsBaseSchema(BaseModel, use_enum_values=True):
 
 class SubstantivePropsCreateSchema(SubstantivePropsBaseSchema):
     id: int
+    props_type: Literal["substantive_props"]

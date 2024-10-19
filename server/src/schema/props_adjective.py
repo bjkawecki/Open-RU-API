@@ -4,7 +4,6 @@ from pydantic import BaseModel
 
 
 class AdjectivePropsBaseSchema(BaseModel):
-    props_type: Literal["adjective"]
     is_gradable: bool
 
     masculine_nominative: Optional[str] = None
@@ -45,4 +44,4 @@ class AdjectivePropsBaseSchema(BaseModel):
 
 
 class AdjectivePropsCreateSchema(AdjectivePropsBaseSchema):
-    id: int
+    props_type: Literal["adjective_props"]

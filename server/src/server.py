@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from src.routers import index_router, translations_router
-from src.routers.words import words_create, words_delete, words_read
+from src.routers.index import router as index_router
+from src.routers.translations import router as translations_router
+from src.routers.words import router as words_router
 
 origins = ["http://localhost:3000", "http://localhost:8000"]
 
@@ -14,9 +15,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.include_router(index_router)
-
-app.include_router(words_create.router)
-app.include_router(words_delete.router)
-app.include_router(words_read.router)
-
+app.include_router(words_router)
 app.include_router(translations_router)

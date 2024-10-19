@@ -37,5 +37,5 @@ class SubstantivePropsModel(PropsModel):
     locative: Mapped[Optional[str]]
 
     __mapper_args__ = {
-        "polymorphic_identity": "substantive",
+        "polymorphic_identity": "substantive_props",
     }
