@@ -1,5 +1,33 @@
 name: words
 services:
+  vuejs:
+    build: client
+    restart: no
+    working_dir: /app
+    environment:
+      - NODE_ENV=development
+      - WDS_SOCKET_PORT=0
+    volumes:
+      - ./client/:/app
+    expose:
+      - "3000"
+    ports:
+      - "3000:3000"
+    command: "npm run dev -- --host 0.0.0.0"
+  # nextjs:
+  #   image: "node:22"
+  #   restart: unless-stopped
+  #   working_dir: /home/node
+  #   environment:
+  #     - NODE_ENV=development
+  #     - WDS_SOCKET_PORT=0
+  #   volumes:
+  #     - ./client/:/home/node
+  #   expose:
+  #     - "3000"
+  #   ports:
+  #     - "3000:3000"
+  #   command: "npm run dev"
 
   # openru-db:
   #   image: postgres:17.0-bookworm
@@ -11,12 +39,10 @@ services:
   #   volumes:
   #     - ./db/scripts:/docker-entrypoint-initdb.d
 
-
   # adminer:
   #   image: adminer
   #   ports:
   #     - 8080:8080
-
 
   nginx:
     image: nginx:1.17
@@ -27,22 +53,7 @@ services:
       - 8000:80
     depends_on:
       - fastapi
-      - nextjs
-
-  nextjs:
-    image: "node:22"
-    restart: unless-stopped
-    working_dir: /home/node
-    environment:
-      - NODE_ENV=development
-      - WDS_SOCKET_PORT=0
-    volumes:
-      - ./client/:/home/node
-    expose:
-      - "3000"
-    ports:
-      - "3000:3000"
-    command: "npm run dev"
+      - vuejs
 
   fastapi:
     image: python:3.12
