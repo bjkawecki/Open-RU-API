@@ -17,13 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body className="">
+      <body className="bg-gray-200">
         <header>
           <Navbar />
         </header>
-        <main className="flex justify-center min-h-screen bg-gray-100">
-          {children}
-        </main>
+        <main>{children}</main>
         <footer></footer>
       </body>
     </html>
