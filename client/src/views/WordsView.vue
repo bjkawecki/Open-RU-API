@@ -1,8 +1,8 @@
 <script setup>
 import Title from "@/components/Title.vue";
-import Words from "@/components/Words.vue";
+import WordsTable from "@/components/WordsTable.vue";
 </script>
 <template>
     <Title title="Wörter" />
-    <Words />
+    <WordsTable />
 </template>

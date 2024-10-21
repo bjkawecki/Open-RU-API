@@ -4,7 +4,7 @@ from src.routers.index import router as index_router
 from src.routers.translations import router as translations_router
 from src.routers.words import router as words_router
 
-origins = ["http://localhost:3000", "http://localhost:8000"]
+origins = ["http://localhost:3000", "http://127.0.0.1:3000", "http://localhost:8000"]
 
 app = FastAPI()
 app.add_middleware(
