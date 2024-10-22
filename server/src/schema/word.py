@@ -45,3 +45,12 @@ class WordCreateSchema(WordBaseSchema):
 
 class WordPublicSchema(WordCreateSchema):
     id: int
+
+
+class WordMetaSchema(BaseModel):
+    level: str
+    topic: str
+
+
+class WordClassSchema(BaseModel):
+    name: WordClass
