@@ -3,7 +3,7 @@ from typing import List, Optional, Union
 
 from pydantic import BaseModel, Field, field_validator
 from pydantic_core import PydanticCustomError
-from src.enums.word import Origin, Usage, WordClass
+from src.enums.word import Level, Origin, Usage, WordClass
 from src.schema.props_adjective import AdjectivePropsCreateSchema
 from src.schema.props_substantive import SubstantivePropsCreateSchema
 from src.schema.translation import TranslationBaseSchema
@@ -23,6 +23,8 @@ class WordBaseSchema(BaseModel, use_enum_values=True):
     comment: Optional[str] = None
     origin: Optional[Origin] = None
     usage: Optional[Usage] = None
+    topic: Optional[str] = None
+    level: Optional[Level] = None
 
     @field_validator("name")
     def validate_name(cls, input_value: str) -> str:

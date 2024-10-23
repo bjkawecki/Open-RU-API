@@ -2,7 +2,7 @@ from typing import Optional
 
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from src.db_connection import Base
-from src.enums.word import Origin, Usage, WordClass
+from src.enums.word import Level, Origin, Usage, WordClass
 from src.models.props_base import Props
 from src.models.translation import Translation
 
@@ -17,7 +17,9 @@ class Word(Base):
     word_class: Mapped[WordClass]
 
     comment: Mapped[Optional[str]]
+    topic: Mapped[Optional[str]]
 
+    level: Mapped[Optional[Level]]
     usage: Mapped[Optional[Usage]]
     origin: Mapped[Optional[Origin]]
 

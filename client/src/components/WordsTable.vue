@@ -1,6 +1,6 @@
 <script setup>
 import Spinner from "@/components/Spinner.vue";
-import { wordClass } from "@/logic/literals";
+import { wordClass } from "@/enums/literals";
 import { onMounted, reactive } from "vue";
 import { RouterLink } from "vue-router";
 
@@ -33,17 +33,17 @@ onMounted(async () => {
     <div class="flex-row w-full md:w-1/2">
       <div class="flex-row shadow">
         <div
-          class="flex justify-around p-5 font-medium text-white uppercase bg-blue-500 border-b">
-          <div>Russisch</div>
-          <div>Wortart</div>
-          <div>Deutsch</div>
+          class="flex justify-around p-5 font-medium text-center text-white uppercase bg-blue-500 border-b">
+          <div class="basis-1/4">Russisch</div>
+          <div class="basis-1/4">Wortart</div>
+          <div class="basis-1/2">Deutsch</div>
         </div>
         <RouterLink :to="'words/' + word.id + '/'" v-for="word in state.words"
           :key="word.id" v-if="state.isLoading == false"
-          class="flex p-5 text-center text-gray-700 bg-gray-50 border-b hover:bg-blue-100">
-          <div class="basis-1/3">{{ word.name_accent }}</div>
-          <div class="basis-1/3">{{ wordClass[word.word_class] }}</div>
-          <div class="basis-1/3">
+          class="flex p-5 text-center text-gray-700 bg-gray-50 border-b hover:bg-blue-100 active:bg-blue-200">
+          <div class="basis-1/4">{{ word.name_accent }}</div>
+          <div class="basis-1/4">{{ wordClass[word.word_class] }}</div>
+          <div class="basis-1/2">
             <div class="inline-flex" v-for="(translation, index) in word.translations"
               :key="translation">
               <div v-if="index">, {{ translation.name }}</div>

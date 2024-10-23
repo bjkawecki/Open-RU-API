@@ -33,7 +33,7 @@ async def upload_file(file: UploadFile, session: Session = Depends(get_session))
         translations = item["translation"]
         meta = item["meta"]
         word_class = base["word_class"]
-        word_db_obj = Word(**base)
+        word_db_obj = Word(**base, **meta)
         session.add(word_db_obj)
         session.flush()
         session.refresh(word_db_obj)

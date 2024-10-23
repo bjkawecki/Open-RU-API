@@ -50,7 +50,7 @@ const handleFileUpload = async () => {
                         id="fileInput" type="file"
                         v-on:change="handleFileChange($event)" name="file" ref="file">
                     <button type="submit"
-                        class="px-3 py-2 mt-2 bg-gray-300 rounded active:bg-gray-400">Submit</button>
+                        class="px-3 py-2 mt-2 bg-gray-300 rounded hover:bg-gray-400 active:bg-gray-300">Submit</button>
                 </form>
             </div>
             <div v-if="state.isLoading">Lädt...</div>
