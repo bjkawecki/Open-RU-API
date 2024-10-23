@@ -52,10 +52,42 @@ async def upload_file(file: UploadFile, session: Session = Depends(get_session))
             except ValidationError:
                 raise HTTPException(400, detail="Invalid document type: props.")
 
+        elif word_class == WordClass.numeral:
+            try:
+                AdjectivePropsBaseSchema.model_validate(props)
+                props_obj = AdjectiveProps(**props, word_id=word_db_obj.id)
+                session.add(props_obj)
+            except ValidationError:
+                raise HTTPException(400, detail="Invalid document type: props.")
+
+        elif word_class == WordClass.preposition:
+            try:
+                AdjectivePropsBaseSchema.model_validate(props)
+                props_obj = AdjectiveProps(**props, word_id=word_db_obj.id)
+                session.add(props_obj)
+            except ValidationError:
+                raise HTTPException(400, detail="Invalid document type: props.")
+
+        elif word_class == WordClass.pronoun:
+            try:
+                AdjectivePropsBaseSchema.model_validate(props)
+                props_obj = AdjectiveProps(**props, word_id=word_db_obj.id)
+                session.add(props_obj)
+            except ValidationError:
+                raise HTTPException(400, detail="Invalid document type: props.")
+
         elif word_class == WordClass.substantive:
             try:
                 SubstantivePropsBaseSchema.model_validate(props)
                 props_obj = SubstantiveProps(**props, word_id=word_db_obj.id)
+                session.add(props_obj)
+            except ValidationError:
+                raise HTTPException(400, detail="Invalid document type: props.")
+
+        elif word_class == WordClass.verb:
+            try:
+                AdjectivePropsBaseSchema.model_validate(props)
+                props_obj = AdjectiveProps(**props, word_id=word_db_obj.id)
                 session.add(props_obj)
             except ValidationError:
                 raise HTTPException(400, detail="Invalid document type: props.")
