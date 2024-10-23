@@ -5,11 +5,19 @@ from pydantic import ValidationError
 from src.db_connection import Session, get_session
 from src.enums.word import WordClass
 from src.models.props_adjective import AdjectiveProps
+from src.models.props_numeral import NumeralProps
+from src.models.props_preposition import PrepositionProps
+from src.models.props_pronoun import PronounProps
 from src.models.props_substantive import SubstantiveProps
+from src.models.props_verb import VerbProps
 from src.models.translation import Translation
 from src.models.word import Word
 from src.schema.props_adjective import AdjectivePropsBaseSchema
+from src.schema.props_numeral import NumeralPropsBaseSchema
+from src.schema.props_preposition import PrepositionPropsBaseSchema
+from src.schema.props_pronoun import PronounPropsBaseSchema
 from src.schema.props_substantive import SubstantivePropsBaseSchema
+from src.schema.props_verb import VerbPropsBaseSchema
 from src.schema.translation import TranslationListSchema
 from src.schema.word import WordBaseSchema, WordMetaSchema
 
@@ -50,31 +58,35 @@ async def upload_file(file: UploadFile, session: Session = Depends(get_session))
                 props_obj = AdjectiveProps(**props, word_id=word_db_obj.id)
                 session.add(props_obj)
             except ValidationError:
-                raise HTTPException(400, detail="Invalid document type: props.")
+                raise HTTPException(
+                    400, detail="Invalid document type: adjective props."
+                )
 
         elif word_class == WordClass.numeral:
             try:
-                AdjectivePropsBaseSchema.model_validate(props)
-                props_obj = AdjectiveProps(**props, word_id=word_db_obj.id)
+                NumeralPropsBaseSchema.model_validate(props)
+                props_obj = NumeralProps(**props, word_id=word_db_obj.id)
                 session.add(props_obj)
             except ValidationError:
-                raise HTTPException(400, detail="Invalid document type: props.")
+                raise HTTPException(400, detail="Invalid document type: numeral props.")
 
         elif word_class == WordClass.preposition:
             try:
-                AdjectivePropsBaseSchema.model_validate(props)
-                props_obj = AdjectiveProps(**props, word_id=word_db_obj.id)
+                PrepositionPropsBaseSchema.model_validate(props)
+                props_obj = PrepositionProps(**props, word_id=word_db_obj.id)
                 session.add(props_obj)
             except ValidationError:
-                raise HTTPException(400, detail="Invalid document type: props.")
+                raise HTTPException(
+                    400, detail="Invalid document type: preposition props."
+                )
 
         elif word_class == WordClass.pronoun:
             try:
-                AdjectivePropsBaseSchema.model_validate(props)
-                props_obj = AdjectiveProps(**props, word_id=word_db_obj.id)
+                PronounPropsBaseSchema.model_validate(props)
+                props_obj = PronounProps(**props, word_id=word_db_obj.id)
                 session.add(props_obj)
             except ValidationError:
-                raise HTTPException(400, detail="Invalid document type: props.")
+                raise HTTPException(400, detail="Invalid document type: pronoun props.")
 
         elif word_class == WordClass.substantive:
             try:
@@ -82,15 +94,17 @@ async def upload_file(file: UploadFile, session: Session = Depends(get_session))
                 props_obj = SubstantiveProps(**props, word_id=word_db_obj.id)
                 session.add(props_obj)
             except ValidationError:
-                raise HTTPException(400, detail="Invalid document type: props.")
+                raise HTTPException(
+                    400, detail="Invalid document type: substantive props."
+                )
 
         elif word_class == WordClass.verb:
             try:
-                AdjectivePropsBaseSchema.model_validate(props)
-                props_obj = AdjectiveProps(**props, word_id=word_db_obj.id)
+                VerbPropsBaseSchema.model_validate(props)
+                props_obj = VerbProps(**props, word_id=word_db_obj.id)
                 session.add(props_obj)
             except ValidationError:
-                raise HTTPException(400, detail="Invalid document type: props.")
+                raise HTTPException(400, detail="Invalid document type: verb props.")
 
     session.commit()
 
