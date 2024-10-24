@@ -6,6 +6,8 @@ from src.schema.translation import TranslationPublicSchema
 router = APIRouter(tags=["Übersetzungen"])
 
 
-@router.get("/translations/", response_model=list[TranslationPublicSchema])
+@router.get(
+    "/translations/", response_model=list[TranslationPublicSchema], status_code=200
+)
 async def get_translation(session: Session = Depends(get_session)):
     return session.query(Translation).all()

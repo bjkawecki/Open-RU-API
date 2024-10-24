@@ -5,10 +5,11 @@ import { onMounted, reactive } from "vue";
 import { RouterLink } from "vue-router";
 
 const state = reactive({
-  jobs: [],
+  words: {},
   isLoading: true,
   error: ""
 });
+
 
 
 onMounted(async () => {
@@ -25,6 +26,8 @@ onMounted(async () => {
     }
   } finally {
     state.isLoading = false;
+
+
   }
 });
 </script>
@@ -39,7 +42,7 @@ onMounted(async () => {
           <div class="basis-1/2">Deutsch</div>
         </div>
         <RouterLink :to="'words/' + word.id + '/'" v-for="word in state.words"
-          :key="word.id" v-if="state.isLoading == false"
+          :key="word.id" v-if="(state.isLoading == false) && state.words.length"
           class="flex p-5 text-center text-gray-700 bg-gray-50 border-b hover:bg-blue-100 active:bg-blue-200">
           <div class="basis-1/4">{{ word.name_accent }}</div>
           <div class="basis-1/4">{{ wordClass[word.word_class] }}</div>
@@ -53,9 +56,12 @@ onMounted(async () => {
             </div>
           </div>
         </RouterLink>
-        <div v-else="state.isLoading == true"
+        <div v-else-if="state.isLoading == true"
           class="flex justify-center p-5 text-gray-700 bg-gray-50 border-b hover:bg-blue-100">
           <Spinner />
+        </div>
+        <div v-else class="flex justify-center p-5 text-gray-700 bg-gray-50 border-b">
+          Keine Einträge.
         </div>
       </div>
       <div v-if="state.error"

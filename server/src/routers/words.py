@@ -46,7 +46,7 @@ async def create_word(
     return db_obj
 
 
-@router.delete("/words/")
+@router.delete("/words/", status_code=204)
 async def delete_words(session: Session = Depends(get_session)):
     words = session.query(Word).all()
     for word in words:
