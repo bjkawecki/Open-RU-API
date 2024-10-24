@@ -6,13 +6,13 @@ from src.enums.props import Aspect, ConjugationClass, Direction, ObjectCase
 
 class VerbPropsBaseSchema(BaseModel):
     conjugation_class: ConjugationClass
-    is_reflexive: bool
-    has_irregular_conjugation: bool
+    is_reflexive: Optional[bool] = False
+    has_irregular_conjugation: Optional[bool] = False
 
     aspect: Aspect
     aspect_partner: Optional[str] = None
 
-    is_motion_verb: bool
+    is_motion_verb: Optional[bool] = False
     motion_partner: Optional[str] = None
     direction: Optional[Direction] = None
 

@@ -44,5 +44,5 @@ class NumeralPropsBaseSchema(BaseModel):
     plural_prepositive: Optional[str] = None
 
 
-class NumeralPropsPropsCreateSchema(NumeralPropsBaseSchema):
+class NumeralPropsCreateSchema(NumeralPropsBaseSchema):
     props_type: Literal["numeral"]

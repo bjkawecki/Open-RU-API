@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 
 class AdjectivePropsBaseSchema(BaseModel):
-    is_gradable: bool
+    is_gradable: Optional[bool] = False
 
     masculine_nominative: Optional[str] = None
     masculine_genitive: Optional[str] = None

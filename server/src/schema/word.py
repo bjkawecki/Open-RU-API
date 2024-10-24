@@ -5,7 +5,11 @@ from pydantic import BaseModel, Field, field_validator
 from pydantic_core import PydanticCustomError
 from src.enums.word import Level, Origin, Usage, WordClass
 from src.schema.props_adjective import AdjectivePropsCreateSchema
+from src.schema.props_numeral import NumeralPropsCreateSchema
+from src.schema.props_preposition import PrepositionPropsCreateSchema
+from src.schema.props_pronoun import PronounPropsCreateSchema
 from src.schema.props_substantive import SubstantivePropsCreateSchema
+from src.schema.props_verb import VerbPropsCreateSchema
 from src.schema.translation import TranslationBaseSchema
 from src.validators.word import Pattern
 
@@ -18,7 +22,7 @@ def has_valid_pattern(*, pattern: str, input_value: str) -> bool:
 class WordBaseSchema(BaseModel, use_enum_values=True):
     model_config = {"extra": "forbid"}
     name: str
-    name_accent: str = Field(pattern=Pattern.name_accent)
+    name_accent: str
     word_class: WordClass
     comment: Optional[str] = None
     origin: Optional[Origin] = None
@@ -40,9 +44,16 @@ class WordBaseSchema(BaseModel, use_enum_values=True):
 
 class WordCreateSchema(WordBaseSchema):
     translations: List[TranslationBaseSchema]
-    props: Optional[Union[AdjectivePropsCreateSchema, SubstantivePropsCreateSchema]] = (
-        Field(discriminator="props_type")
-    )
+    props: Optional[
+        Union[
+            AdjectivePropsCreateSchema,
+            NumeralPropsCreateSchema,
+            PrepositionPropsCreateSchema,
+            PronounPropsCreateSchema,
+            SubstantivePropsCreateSchema,
+            VerbPropsCreateSchema,
+        ]
+    ] = Field(discriminator="props_type")
 
 
 class WordPublicSchema(WordCreateSchema):

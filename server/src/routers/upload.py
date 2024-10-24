@@ -30,6 +30,7 @@ async def upload_file(file: UploadFile, session: Session = Depends(get_session))
         raise HTTPException(400, detail="Invalid document type.")
     data = json.loads(file.file.read())
     for item in data:
+        print(item)
         if not WordBaseSchema.model_validate(item["base"]):
             raise HTTPException(400, detail="Invalid document type: base.")
         if not TranslationListSchema(translations=item["translation"]):
@@ -50,61 +51,74 @@ async def upload_file(file: UploadFile, session: Session = Depends(get_session))
             new_translation_obj = Translation(name=translation, word_id=word_db_obj.id)
             session.add(new_translation_obj)
 
-        props = item["props"]
+        if "props" in item:
+            props = item["props"]
 
-        if word_class == WordClass.adjective:
-            try:
-                AdjectivePropsBaseSchema.model_validate(props)
-                props_obj = AdjectiveProps(**props, word_id=word_db_obj.id)
-                session.add(props_obj)
-            except ValidationError:
-                raise HTTPException(
-                    400, detail="Invalid document type: adjective props."
-                )
+            if word_class == WordClass.adjective:
+                try:
+                    AdjectivePropsBaseSchema.model_validate(props)
+                    props_obj = AdjectiveProps(**props, word_id=word_db_obj.id)
+                    session.add(props_obj)
+                except ValidationError as e:
+                    raise HTTPException(
+                        400,
+                        detail=f"Invalid document type: adjective props. Failed at word: {word_db_obj.name}. {e}",
+                    )
 
-        elif word_class == WordClass.numeral:
-            try:
-                NumeralPropsBaseSchema.model_validate(props)
-                props_obj = NumeralProps(**props, word_id=word_db_obj.id)
-                session.add(props_obj)
-            except ValidationError:
-                raise HTTPException(400, detail="Invalid document type: numeral props.")
+            elif word_class == WordClass.numeral:
+                try:
+                    NumeralPropsBaseSchema.model_validate(props)
+                    props_obj = NumeralProps(**props, word_id=word_db_obj.id)
+                    session.add(props_obj)
+                except ValidationError as e:
+                    raise HTTPException(
+                        400,
+                        detail=f"Invalid document type: numeral props. Failed at word: {word_db_obj.name}. {e}",
+                    )
 
-        elif word_class == WordClass.preposition:
-            try:
-                PrepositionPropsBaseSchema.model_validate(props)
-                props_obj = PrepositionProps(**props, word_id=word_db_obj.id)
-                session.add(props_obj)
-            except ValidationError:
-                raise HTTPException(
-                    400, detail="Invalid document type: preposition props."
-                )
+            elif word_class == WordClass.preposition:
+                try:
+                    PrepositionPropsBaseSchema.model_validate(props)
+                    props_obj = PrepositionProps(**props, word_id=word_db_obj.id)
+                    session.add(props_obj)
+                except ValidationError as e:
+                    raise HTTPException(
+                        400,
+                        detail=f"Invalid document type: preposition props. Failed at word: {word_db_obj.name}. {e}",
+                    )
 
-        elif word_class == WordClass.pronoun:
-            try:
-                PronounPropsBaseSchema.model_validate(props)
-                props_obj = PronounProps(**props, word_id=word_db_obj.id)
-                session.add(props_obj)
-            except ValidationError:
-                raise HTTPException(400, detail="Invalid document type: pronoun props.")
+            elif word_class == WordClass.pronoun:
+                try:
+                    PronounPropsBaseSchema.model_validate(props)
+                    props_obj = PronounProps(**props, word_id=word_db_obj.id)
+                    session.add(props_obj)
+                except ValidationError as e:
+                    raise HTTPException(
+                        400,
+                        detail=f"Invalid document type: pronoun props. Failed at word: {word_db_obj.name}. {e}",
+                    )
 
-        elif word_class == WordClass.substantive:
-            try:
-                SubstantivePropsBaseSchema.model_validate(props)
-                props_obj = SubstantiveProps(**props, word_id=word_db_obj.id)
-                session.add(props_obj)
-            except ValidationError:
-                raise HTTPException(
-                    400, detail="Invalid document type: substantive props."
-                )
+            elif word_class == WordClass.substantive:
+                try:
+                    SubstantivePropsBaseSchema.model_validate(props)
+                    props_obj = SubstantiveProps(**props, word_id=word_db_obj.id)
+                    session.add(props_obj)
+                except ValidationError as e:
+                    raise HTTPException(
+                        400,
+                        detail=f"Invalid document type: substantive props. Failed at word: {word_db_obj.name}. {e}",
+                    )
 
-        elif word_class == WordClass.verb:
-            try:
-                VerbPropsBaseSchema.model_validate(props)
-                props_obj = VerbProps(**props, word_id=word_db_obj.id)
-                session.add(props_obj)
-            except ValidationError:
-                raise HTTPException(400, detail="Invalid document type: verb props.")
+            elif word_class == WordClass.verb:
+                try:
+                    VerbPropsBaseSchema.model_validate(props)
+                    props_obj = VerbProps(**props, word_id=word_db_obj.id)
+                    session.add(props_obj)
+                except ValidationError as e:
+                    raise HTTPException(
+                        400,
+                        detail=f"Invalid document type: verb props. Failed at word: {word_db_obj.name}. {e}",
+                    )
 
     session.commit()
 

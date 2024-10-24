@@ -37,14 +37,14 @@ class PronounType(str, Enum):
 class DeclinationType(str, Enum):
     adjective = "adjective"
     substantive = "substantive"
-    no = "no"
+    none = "none"
 
 
 class Genus(str, Enum):
     masculine = "masculine"
     feminine = "feminine"
     neutral = "neutral"
-    no = "no"
+    none = "none"
 
 
 class DeclinationClass(str, Enum):
@@ -53,7 +53,7 @@ class DeclinationClass(str, Enum):
     class_3 = "3"
     adjective = "adjective"
     irregular = "irregular"
-    no = "no"
+    none = "none"
 
 
 class Stress(str, Enum):
