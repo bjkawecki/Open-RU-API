@@ -36,6 +36,8 @@ const handleFileUpload = async () => {
     } catch (err) {
         if (err instanceof Error) {
             state.error = err.message;
+            refForm.value.reset();
+            state.file = null;
         }
     } finally {
         state.isLoading = false;

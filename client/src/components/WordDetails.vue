@@ -2,9 +2,10 @@
 import BackButton from "@/components/BackButton.vue";
 import AdjectiveProps from "@/components/props/AdjectiveProps.vue";
 import Spinner from "@/components/Spinner.vue";
-import { wordClass } from "@/enums/literals";
+import { wordClass } from "@/enums/word";
 import { onMounted, reactive } from "vue";
 import { useRoute } from "vue-router";
+import SubstantiveProps from "./props/SubstantiveProps.vue";
 
 const route = useRoute();
 const jobId = route.params.id;
@@ -64,6 +65,8 @@ onMounted(async () => {
                 <div v-if="state.word.level">Stufe: {{ state.word.level }}</div>
                 <div v-if="state.word.topic">Thema: {{ state.word.topic }}</div>
                 <AdjectiveProps v-if="state.props?.props_type === 'adjective'"
+                    :props=state.props />
+                <SubstantiveProps v-if="state.props?.props_type === 'substantive'"
                     :props=state.props />
 
             </div>

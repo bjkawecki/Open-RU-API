@@ -1,6 +1,6 @@
 <script setup>
 import Spinner from "@/components/Spinner.vue";
-import { wordClass } from "@/enums/literals";
+import { wordClass } from "@/enums/word";
 import { onMounted, reactive } from "vue";
 import { RouterLink } from "vue-router";
 
@@ -32,7 +32,7 @@ onMounted(async () => {
 });
 </script>
 <template>
-  <section class="flex justify-center">
+  <section class="flex justify-center mb-10">
     <div class="flex-row w-full md:w-1/2">
       <div class="flex-row shadow">
         <div

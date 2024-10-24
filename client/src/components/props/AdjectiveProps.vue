@@ -1,5 +1,5 @@
 <script setup>
-import { cases } from "@/enums/literals";
+import { cases } from "@/enums/word";
 
 defineProps({
     props: {}
