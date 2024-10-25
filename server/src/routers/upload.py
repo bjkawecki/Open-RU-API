@@ -30,7 +30,6 @@ async def upload_file(file: UploadFile, session: Session = Depends(get_session))
         raise HTTPException(400, detail="Invalid document type.")
     data = json.loads(file.file.read())
     for item in data:
-        print(item)
         if not WordBaseSchema.model_validate(item["base"]):
             raise HTTPException(400, detail="Invalid document type: base.")
         if not TranslationListSchema(translations=item["translation"]):

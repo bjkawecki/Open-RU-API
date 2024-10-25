@@ -1,6 +1,10 @@
 export const wordClass = {
   adjective: "Adjektiv",
+  numeral: "Numeral",
+  preposition: "Preposition",
+  pronoun: "Pronoun",
   substantive: "Substantiv",
+  verb: "Verb",
 };
 
 export const cases = {

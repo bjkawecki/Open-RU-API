@@ -24,6 +24,7 @@ class VerbProps(Props):
 
     direct_object_case: Mapped[Optional[ObjectCase]]
     direct_object_preposition: Mapped[Optional[str]]
+    indirect_object_case: Mapped[Optional[ObjectCase]]
     indirect_object_preposition: Mapped[Optional[str]]
 
     present_singular_1: Mapped[Optional[str]]

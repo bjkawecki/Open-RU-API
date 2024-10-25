@@ -61,7 +61,7 @@ async def delete_words(session: Session = Depends(get_session)):
     response_model=List[WordPublicSchema],
 )
 async def read_words(session: Session = Depends(get_session)):
-    return session.query(Word).all()
+    return session.query(Word).limit(10).all()
 
 
 @router.get(

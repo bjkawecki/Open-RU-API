@@ -32,6 +32,7 @@ class PronounType(str, Enum):
     definite = "definite"
     indefinite = "indefinite"
     negation = "negation"
+    reflexive = "reflexive"
 
 
 class DeclinationType(str, Enum):

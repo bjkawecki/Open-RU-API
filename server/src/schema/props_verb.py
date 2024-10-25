@@ -17,6 +17,7 @@ class VerbPropsBaseSchema(BaseModel):
     direction: Optional[Direction] = None
 
     direct_object_case: Optional[ObjectCase] = None
+    indirect_object_case: Optional[ObjectCase] = None
     direct_object_preposition: Optional[str] = None
     indirect_object_preposition: Optional[str] = None
 
