@@ -14,20 +14,6 @@ services:
     ports:
       - "3000:3000"
     command: "npm run dev -- --host 0.0.0.0"
-  # nextjs:
-  #   image: "node:22"
-  #   restart: unless-stopped
-  #   working_dir: /home/node
-  #   environment:
-  #     - NODE_ENV=development
-  #     - WDS_SOCKET_PORT=0
-  #   volumes:
-  #     - ./client/:/home/node
-  #   expose:
-  #     - "3000"
-  #   ports:
-  #     - "3000:3000"
-  #   command: "npm run dev"
 
   # openru-db:
   #   image: postgres:17.0-bookworm
